@@ -37,42 +37,32 @@
 
 
                 <article>
-                    <header>
+
+                      <header>
                         <h2>Project 1</h1>
-                          </header>
+                      </header>
+                      <section>
                         <p>
-                          <ul>
-                            <li><a href="p1.php?id=s11&proj=1">Seth Bakes</a></li>
-                            <li><a href="p1.php?id=b12&proj=1">Brent Christy</a></li>
-                            <li><a href="p1.php?id=d13&proj=1">Daniel Doherty</a></li>
-                            <li><a href="p1.php?id=b14&proj=1">Benjamin Gincley</a></li>
-                            <li><a href="p1.php?id=t15&proj=1">Tammy Huynh</a></li>
-                            <li><a href="p1.php?id=g16&proj=1">Gurtaj Khatra</a></li>
-                            <li><a href="p1.php?id=a17&proj=1">Adam Lane</a></li>
-                            <li><a href="p1.php?id=s18&proj=1">Samuel Lazer</a></li>
-                            <li><a href="p1.php?id=d19&proj=1">Daniel Lieman</a></li>
-                            <li><a href="p1.php?id=s20&proj=1">Sydnee Mizuno</a></li>
-                            <li><a href="p1.php?id=c21&proj=1">Chi Mo</a></li>
-                            <li><a href="p1.php?id=c22&proj=1">Christopher Murphy</a></li>
-                            <li><a href="p1.php?id=m23&proj=1">Matthew Parlon</a></li>
-                            <li><a href="p1.php?id=o24&proj=1">Oliver Scott</a></li>
-                            <li><a href="p1.php?id=l25&proj=1">Leonid Stolov</a></li>
-                            <li><a href="p1.php?id=m26&proj=1">Michael Van Wickle</a></li>
-                            <li><a href="p1.php?id=d27&proj=1">Djordje Vlajkovic</a></li>
-                            <li><a href="p1.php?id=s28&proj=1">Samantha Wagner</a></li>
-                        </ul>
-                    </p>
-
-
-
-                
+                          <ul class="students">
+                            <?php
+                            $proj=1;
+                            include('list_students.php')
+                            ?>
+                          </ul>
+                        </p>
+                  </section>
+                </article>
+                    <aside>
+                        <h3>Project page</h3>
+                        <p>This is a project page for AWD3302. As you complete individual writing projects 1-3, this page will be populated with links to the transformed views of the XML documents that you push to GitHub.</p>
+                    </aside>
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
         <div class="footer-container">
             <footer class="wrapper">
-                <h3>footer</h3>
+                <h3></h3>
             </footer>
         </div>
 

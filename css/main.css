@@ -117,7 +117,7 @@ nav a:visited {
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color:#fbded0;
 }
 
 /* ==============
@@ -157,20 +157,63 @@ nav a:hover {
 
 div.xsl_v2
 {
-  width: 90%;
-  border: 1px solid;
+
+  -webkit-box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.47);
+  -moz-box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.47);
+  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.47);
   padding: 10px 30px;
   background-color: #eeeeee;
   display: block;
-  margin: 0 auto;
+
 }
 
 div.xsl_v1
 {
-  width: 90%;
+  width: 100%;
 
 }
 
+pre.prettyprint {
+    font-size: .8em;
+
+}
+.main h2 {
+font-size: 1.6em;
+margin: 10px;
+  color: #e44d26;
+}
+
+.students a, .students a:visited {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+
+}
+
+.students a:hover {
+  text-decoration: none;
+  color: grey;
+}
+
+article ul.students {
+  list-style: none;
+  margin-left: 30px;
+}
+
+footer ul, footer a {
+font-size: 1.1em;
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #ffccb3;
+}
 /* HOVER TOOL TIPS FOR NOTES */
 sup {
 
@@ -268,7 +311,7 @@ sup {
 
     nav a {
         float: left;
-        width: 27%;
+        width: 40%;
         margin: 0 1.7%;
         padding: 25px 2%;
         margin-bottom: 0;
@@ -328,6 +371,11 @@ sup {
     .main article {
         float: left;
         width: 57%;
+    }
+
+    article.project
+    {
+      width:100%
     }
 
     .main aside {

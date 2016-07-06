@@ -24,15 +24,10 @@
         include('header.php') ?>
       <div class="main-container">
       <div class="main wrapper clearfix">
-        <aside>
-<h3>Students</h3>
 
+        <article class="project">
 
-            <ul><?php include('list_students.php') ?></ul>
-        </aside>
-        <section>
-
-
+<header>
             <h3>Project 1</h3>
             <?php
             $proj = $_GET['proj'];
@@ -49,6 +44,8 @@
               <a href='p1.php?transformed=true&id=<?php echo $id ?>&proj=<?php echo $proj ?>'>View Formatted File</a>
 
 </p>
+</header>
+<section>
               <?php
                 $proj = $_GET['proj'];
                 $id = $_GET['id'];
@@ -74,13 +71,29 @@
                     ?>
 
         </section>
+      </article>
+        <!--<aside class="projectpage">
+        <h3>Students</h3>
+
+
+            <ul><?php include('list_students.php') ?></ul>
+        </aside>-->
 
 
 
-
+</div> <!-- #main -->
+</div> <!-- #main-container -->
+<div class="footer-container">
+    <footer class="wrapper">
+      <h2>Select Student</h2>
+        <ul><?php include('list_students.php') ?></ul>
+    </footer>
 </div>
-</div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
+
+<script src="js/main.js"></script>
 
 </body>
 </html>
