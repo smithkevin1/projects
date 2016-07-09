@@ -1,7 +1,7 @@
     <div class="xsl_v2"><?php
     // Load XML file
     $xml = new DOMDocument;
-    $xml->load(dirname(__FILE__) . '/../_xml/' .$id. '_p' .$proj. '.xml');
+    $xml->load(dirname(__FILE__) . '/../_xml/p' .$proj. '_' .$id.  '.xml');
 
     // Load XSL file
     $xsl = new DOMDocument;
