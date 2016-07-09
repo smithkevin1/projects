@@ -1,7 +1,7 @@
 <?php
 if(isset($proj)) {
   echo
-  '<li><a href=\'p' .$proj. '.php?id=temp&proj=' .$proj. '\'>Template file</a></li>
+  '<li><a href=\'p' .$proj. '.php?id=test_doc&proj=' .$proj. '\'>Template file</a></li>
   <li><a href=\'p' .$proj. '.php?id=b11&proj=' .$proj. '\'>Seth Bakes</a></li>
   <li><a href=\'p' .$proj. '.php?id=b29&proj=' .$proj. '\'>Joseph Beaudreault</a></li>
   <li><a href=\'p' .$proj. '.php?id=c12&proj=' .$proj. '\'>Brent Christy</a></li>
@@ -25,7 +25,8 @@ if(isset($proj)) {
 elseif(isset($_GET['proj'])) {
   $proj = $_GET['proj'];
   echo
-  '<li><a href=\'p' .$proj. '.php?id=b11&proj=' .$proj. '\'>Seth Bakes</a></li>
+  '<li><a href=\'p' .$proj. '.php?id=test_doc&proj=' .$proj. '\'>Template file</a></li>
+  <li><a href=\'p' .$proj. '.php?id=b11&proj=' .$proj. '\'>Seth Bakes</a></li>
   <li><a href=\'p' .$proj. '.php?id=b29&proj=' .$proj. '\'>Joseph Beaudreault</a></li>
   <li><a href=\'p' .$proj. '.php?id=c12&proj=' .$proj. '\'>Brent Christy</a></li>
   <li><a href=\'p' .$proj. '.php?id=d13&proj=' .$proj. '\'>Daniel Doherty</a></li>
