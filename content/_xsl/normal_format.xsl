@@ -84,7 +84,7 @@
     </xsl:template>
     
     <xsl:template match="annotation//q">
-        "<xsl:apply-templates/>"
+        “<xsl:apply-templates/>”
     </xsl:template>
     <!--end annotated bib templates-->
     
