@@ -154,6 +154,9 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+#text {
+  margin-bottom: 2em;
+}
 
 div.xsl_v2
 {
@@ -165,6 +168,10 @@ div.xsl_v2
   background-color: #eeeeee;
   display: block;
 
+}
+
+span.italics {
+  font-style: italic;
 }
 
 div.xsl_v1
