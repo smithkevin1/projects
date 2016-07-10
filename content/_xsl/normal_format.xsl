@@ -24,9 +24,13 @@
     
     <xsl:template match="docHead">
         <div id="head">
-            <h3>Title: <xsl:value-of select="./title"/></h3>
-            <h3>Author: <xsl:value-of select="./author"/></h3>
-            <h4>Date: <xsl:value-of select="version"/></h4>
+            <h2 class="assign_title"><xsl:value-of select="./title"/></h2>
+            <h3>Author: <xsl:value-of select="./author"/></h3>      
+            <xsl:for-each select="version">
+                <xsl:if test="not(following-sibling::version)"><h4>Date: <xsl:value-of select="@date"/></h4></xsl:if></xsl:for-each>
+                    
+                
+            
             
         </div>
     </xsl:template>
