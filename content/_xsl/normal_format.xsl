@@ -83,6 +83,11 @@
         </p>
     </xsl:template>
     
+    <xsl:template match="annotation//q">
+        "<xsl:apply-templates/>"
+    </xsl:template>
+    <!--end annotated bib templates-->
+    
     <xsl:template match="p">
         <p>
             <xsl:apply-templates/>
