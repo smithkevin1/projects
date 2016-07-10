@@ -3,17 +3,16 @@
 <!--the second line in the document associates the schema, so be sure not to change it-->
 <DOC>
     <docHead>
-        <!--required header includes metadata about the assignment (title, author, version)-->
-        <title>Title of Assignment</title>
-        <author xml:id="your_id_here">Your name here</author>
-        <version n="num_of_version" date="2016-01-01"/>
-        <!--note that the date must be YYYY-MM-DD for the document to be valid-->
+        <!--required header includes metadata about the assignment (title, author, at least one version element)-->
+        <title>Example Annotated Bibliography</title>
+        <author xml:id="s01">Kevin Smith</author>
+        <version n="1" date="2016-07-10"/>
     </docHead>
 
 
     <annotated_bib>
         <problem_stmt>This is a sample problem statement; required element, according to the project
-            1 prompt.</problem_stmt>
+            1 prompt.<note type="instructor" resp="#kgs">this is a sample instructor note</note></problem_stmt>
 
         <citation n="1" style="APA"><author n="1">Waite, L. J.</author>, <author n="2"
                 >Goldschneider, F. K.</author>, &amp; <author n="3">Witsberger, C.</author> (1986).
