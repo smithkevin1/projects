@@ -87,6 +87,11 @@
         </p>
     </xsl:template>
     
+    <xsl:template match="annotated_bib//ref">
+        <xsl:variable name="href" select="text()"/>
+        <a href="{$href}"><xsl:apply-templates/></a>
+    </xsl:template>
+    
     <xsl:template match="annotation//q">
         “<xsl:apply-templates/>”
     </xsl:template>
