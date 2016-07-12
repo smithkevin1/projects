@@ -22,11 +22,11 @@
         <![endif]-->
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title">List of Elements for AWD 3302</h1>
+                <h1 class="title">Elements for AWD 3302</h1>
                 <nav>
                     <ul>
                         <li><a href="http://su16awd.kevingeraldsmith.com">Course Site</a></li>
-                        <li><a href="https://github.com/smithkevin1/AWD">GitHub</a></li>
+                        <li><a href="http://su16awd.kevingeraldsmith.com/projects/students.php">Project Page</a></li>
                     </ul>
                 </nav>
             </header>
@@ -36,15 +36,68 @@
               <article>
 
                     <header>
-                      <h2>Crib</h2>
+                      <h2></h2>
                     </header>
                     <section>
                       <h3>&lt;annotated_bib&gt;</h3>
                       <p>
+                        This is the container element for project 1.
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;problem_stmt&gt;</h3>
+                      <p>
                         Description of element.
                       </p>
-                </section>
+                    </section>
+                    <section>
+                      <h3>&lt;citation&gt;</h3>
+                      <p>
+                        A properly cited document [use @n attribute for
+               ordering].
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;annotation&gt;</h3>
+                      <p>
+                        Annotation must follow a citation element; contains required background, summary, and relevance element(s).
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;title&gt;</h3>
+                      <p>
+                        Description of element.
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;author&gt;</h3>
+                      <p>
+                        Description of element.
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;background&gt;</h3>
+                      <p>
+                        Description of element.
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;summary&gt;</h3>
+                      <p>
+                        Description of element.
+                      </p>
+                    </section>
+                    <section>
+                      <h3>&lt;relevance&gt;</h3>
+                      <p>
+                        Description of element.
+                      </p>
+                    </section>
               </article>
+              <aside>
+              <h3>Element List</h3>
+              <p>This is a list of XML elements for AWD3302. This is not an exhaustive list, but should provide a nice reference to consult while composing. This page will be updated as additional genre models are produced in projects 2 and 3.</p>
+          </aside>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
