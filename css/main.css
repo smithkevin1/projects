@@ -166,7 +166,8 @@ div.xsl_v2
   box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.47);
   padding: 10px 30px;
   background-color: #eeeeee;
-  display: block;
+
+  overflow-x: scroll;
 
 }
 
