@@ -34,65 +34,66 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
               <article>
-
                     <header>
                       <h2></h2>
                     </header>
                     <section>
                       <h3>&lt;annotated_bib&gt;</h3>
                       <p>
-                        This is the container element for project 1.
+                        (annotated bibliography) container element for writing project 1; includes a problem statement and at least one group of citation and annotation elements
+                      </p>
+                    </section>
+                    <section>
+                    <h3>&lt;annotation&gt;</h3>
+                    <p>
+                      (annotation) must follow a citation element; contains required background, summary, and relevance element(s)
+                    </p>
+                  </section>
+                  <section>
+                    <h3>&lt;author&gt;</h3>
+                    <p>
+                      (author) contains author of work (either assignment of source) [use @n for ordering; use @xml:id for assignment authoring]
+                    </p>
+                  </section>
+                  <section>
+                    <h3>&lt;background&gt;</h3>
+                    <p>
+                      (background information) anything that could help provide context or information with regard to the source you are using; can contain text, and optional q elements [requires @type element]
+                    </p>
+                  </section>
+                    <section>
+                      <h3>&lt;citation&gt;</h3>
+                      <p>
+                        (citation) a properly cited document [use @n attribute for
+                ordering; @style attribute for citation style]
                       </p>
                     </section>
                     <section>
                       <h3>&lt;problem_stmt&gt;</h3>
                       <p>
-                        Description of element.
+                        (problem statement) contains the problem statement for which the citations and annotations are relevant
                       </p>
                     </section>
                     <section>
-                      <h3>&lt;citation&gt;</h3>
+                      <h3>&lt;ref&gt;</h3>
                       <p>
-                        A properly cited document [use @n attribute for
-               ordering].
+                        (reference) defines a reference to another location; can contain any URI
                       </p>
                     </section>
+
                     <section>
-                      <h3>&lt;annotation&gt;</h3>
+                      <h3>&lt;relevance&gt;</h3>
                       <p>
-                        Annotation must follow a citation element; contains required background, summary, and relevance element(s).
-                      </p>
-                    </section>
-                    <section>
-                      <h3>&lt;title&gt;</h3>
-                      <p>
-                        Description of element.
-                      </p>
-                    </section>
-                    <section>
-                      <h3>&lt;author&gt;</h3>
-                      <p>
-                        Description of element.
-                      </p>
-                    </section>
-                    <section>
-                      <h3>&lt;background&gt;</h3>
-                      <p>
-                        Description of element.
+                        (relevance) where the source can be used and why the text may be pertinent to the problem statement; can contain text [requires @type attribute]
                       </p>
                     </section>
                     <section>
                       <h3>&lt;summary&gt;</h3>
                       <p>
-                        Description of element.
+                        (summary) summarization of the source, can be general information, interpretive summary, and/or summary of the research approach; can contain text, notes, and optional q elements [requires @type element]
                       </p>
                     </section>
-                    <section>
-                      <h3>&lt;relevance&gt;</h3>
-                      <p>
-                        Description of element.
-                      </p>
-                    </section>
+
               </article>
               <aside>
               <h3>Element List</h3>
