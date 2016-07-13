@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" 
     xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -88,7 +88,7 @@
         <p class="annotation">
             <xsl:for-each select="child::background | summary | relevance"> 
                 <xsl:variable name="type" select="./@type"/>
-                <xsl:variable name="rng" select="document('../schema_3302.rng')//rng:value[. eq $type]"/>
+                <xsl:variable name="rng" select="document('../schema_3302.rng')//rng:attribute/value[. eq $type]"/>
                 <xsl:variable name="rng_doc" select="$rng/following-sibling::a:documentation[1]"/>
                 
                 <span class="{name()}" data-tooltip="{name()}: {$rng_doc}" data-tooltip-position="bottom">

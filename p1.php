@@ -42,6 +42,7 @@
 
               <a href='p1.php?xml=true&id=<?php echo $id ?>&proj=<?php echo $proj ?>'>View XML Source</a>
               <a href='p1.php?transformed=true&id=<?php echo $id ?>&proj=<?php echo $proj ?>'>View Formatted File</a>
+              <!-- <a href='p1.php?annotated=true&id=<?php echo $id ?>&proj=<?php echo $proj ?>'>View Annotated File</a> FIGURING OUT XSLT 2.0 w/ php-->
 
 </p>
 </header>
@@ -62,11 +63,20 @@
                         include_once(dirname(__FILE__) . '/content/_transformations/XML_v2.php');
                       }
 
+                      function p1AnnotatedXML () {
+                        $id = $_GET['id'];
+                        $proj = $_GET['proj'];
+                        include_once(dirname(__FILE__) . '/content/_transformations/XML_v3.php');
+                      }
+
                       if (isset($_GET['xml'])) {
                         p1regXML();
                       }
                       if (isset($_GET['transformed'])) {
                         p1TransformedXML();
+                      }
+                      if (isset($_GET['annotated'])) {
+                        p1AnnotatedXML();
                       }
                     ?>
 
