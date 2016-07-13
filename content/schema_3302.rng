@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+    <!-- MACROS -->
+    <define name="macro.paraContent">
+        <zeroOrMore>
+            <choice>
+                <text/>
+                <!--<ref name="model.phrase"/>
+                <ref name="model.inter"/>-->
+
+                <ref name="model.global"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <!-- ATTRIBUTE CLASSES AND DEFINITIONS -->
+    <define name="att.review.type">
+        <optional>
+            <attribute name="type">
+                <a:documentation>(type of reviewer) sugggested values are 'peer' or
+                    'instructor'</a:documentation>
+                <data type="string"/>
+            </attribute>
+        </optional>
+    </define>
+    <!-- global attributes -->
+    <define name="att.global.attributes">
+        <ref name="att.global.rendition.attributes"/>
+        <ref name="att.global.linking.attributes"/>
+        <ref name="att.global.responsibility.attributes"/>
+        <ref name="att.global.attribute.xmlid"/>
+        <ref name="att.global.attribute.n"/>
+    </define>
+    <define name="att.global.linking.attributes">
+        <ref name="att.global.linking.attribute.corresp"/>
+        <ref name="att.global.linking.attribute.next"/>
+        <ref name="att.global.linking.attribute.prev"/>
+    </define>
+    <define name="att.global.linking.attribute.corresp">
+        <optional>
+            <attribute name="corresp">
+                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    >(corresponds) points to elements that correspond to the current element in some
+                    way.</a:documentation>
+                <list>
+                    <oneOrMore>
+                        <data type="anyURI"/>
+                    </oneOrMore>
+                </list>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.linking.attribute.next">
+        <optional>
+            <attribute name="next">
+                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    >points to the next element of a virtual aggregate of which the current element
+                    is part.</a:documentation>
+                <data type="anyURI"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.linking.attribute.prev">
+        <optional>
+            <attribute name="prev">
+                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    >(previous) points to the previous element of a virtual aggregate of which the
+                    current element is part.</a:documentation>
+                <data type="anyURI"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.attribute.xmlid">
+        <optional>
+            <attribute name="xml:id">
+                <a:documentation>(identifier) provides a unique identifier for the element bearing
+                    the attribute.</a:documentation>
+                <data type="ID"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.attribute.n">
+        <optional>
+            <attribute name="n">
+                <a:documentation>(number) gives a number (or other label) for an element, which is
+                    not necessarily unique within the document.</a:documentation>
+                <data type="string"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.rendition.attributes">
+        <ref name="att.global.rendition.attribute.rend"/>
+    </define>
+    <define name="att.global.rendition.attribute.rend">
+        <optional>
+            <attribute name="rend">
+                <a:documentation>(rendition) indicates how the element in question should be
+                    rendered or presented in the source text.</a:documentation>
+                <list>
+                    <oneOrMore>
+                        <data type="token">
+                            <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                        </data>
+                    </oneOrMore>
+                </list>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.global.responsibility.attributes">
+        <ref name="att.global.responsibility.attribute.resp"/>
+    </define>
+    <define name="att.global.responsibility.attribute.resp">
+        <optional>
+            <attribute name="resp">
+                <a:documentation>(responsible party) indicates the agency responsible for the
+                    intervention or interpretation, for example a docAuthor or peer reviewer. Be
+                    sure to use your xml:id</a:documentation>
+                <list>
+                    <oneOrMore>
+                        <data type="anyURI"/>
+                    </oneOrMore>
+                </list>
+            </attribute>
+        </optional>
+    </define>
+
+    <!-- for @type and @subtype -->
+    <define name="att.typed.attributes">
+        <ref name="att.typed.attribute.type"/>
+        <ref name="att.typed.attribute.subtype"/>
+    </define>
+    <define name="att.typed.attribute.type">
+        <optional>
+            <attribute name="type">
+                <a:documentation>characterizes the element in some sense, using any convenient
+                    classification scheme or typology.</a:documentation>
+            </attribute>
+        </optional>
+    </define>
+    <define name="att.typed.attribute.subtype">
+        <optional>
+            <attribute name="subtype">
+                <a:documentation>provides a sub-categorization of the element, if
+                    needed</a:documentation>
+            </attribute>
+        </optional>
+    </define>
+
+    <!-- for URLs -->
+    <define name="att.resourced.attributes">
+        <ref name="att.resourced.attribute.url"/>
+    </define>
+    <define name="att.resourced.attribute.url">
+        <attribute name="url">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(uniform
+                resource locator) specifies the URL from which the media concerned may be
+                obtained.</a:documentation>
+            <data type="anyURI"/>
+        </attribute>
+    </define>
+
+    <!-- CONTENT MODELS -->
+    <define name="model.global">
+        <choice>
+            <ref name="model.noteLike"/>
+            <!--<ref name="figure"/> hold off on figure for now-->
+        </choice>
+    </define>
+    <define name="model.divLike">
+        <ref name="div"/>
+    </define>
+    <define name="model.divPart">
+        <choice>
+            <ref name="model.pLike"/>
+        </choice>
+    </define>
+    <define name="model.pLike">
+        <choice>
+            <ref name="p"/>
+        </choice>
+    </define>
+    <define name="model.noteLike">
+        <ref name="note"/>
+    </define>
+
+
+    <!-- ELEMENT DEFINITIONS -->
+    <define name="note">
+        <element name="note">
+            <a:documentation>contains a note made on the text intended to provide additional
+                information or comment upon the text; requires a @type attribute and a @resp
+                (resposibile party) attribute with your id for peer reviewer note</a:documentation>
+            <optional>
+                <ref name="att.global.attributes"/>
+            </optional>
+            <attribute name="type">
+                <a:documentation>must specify whether the note is @type peer or
+                    instructor</a:documentation>
+                <choice>
+                    <value>peer</value>
+                    <a:documentation>this note is written from a peer</a:documentation>
+                    <value>instructor</value>
+                    <a:documentation>this note is from the instructor</a:documentation>
+                </choice>
+            </attribute>
+            <text/>
+        </element>
+    </define>
+    <define name="bibl">
+        <element name="bibl">
+            <a:documentation>(bibliographic citation) contains a bibliographic
+                citation.</a:documentation>
+            <zeroOrMore>
+                <choice>
+                    <text/>
+                    <ref name="model.global"/>
+                </choice>
+            </zeroOrMore>
+            <!--<ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>-->
+            <empty/>
+        </element>
+    </define>
+    <define name="listBibl">
+        <element name="listBibl">
+            <a:documentation>(bibliographic list) contains a list of bibliographic
+                citations.</a:documentation>
+            <choice>
+                <oneOrMore>
+                    <choice>
+                        <ref name="model.biblLike"/>
+                    </choice>
+                </oneOrMore>
+            </choice>
+            <!-- <ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>  -->
+        </element>
+    </define>
+    <define name="version">
+        <element name="version">
+            <empty/>
+            <ref name="att.global.attribute.n"/>
+            <attribute name="date">
+                <a:documentation>This is the date of this version (n) of the text you are working
+                    on.</a:documentation>
+                <data type="date"/>
+            </attribute>
+        </element>
+    </define>
+    <define name="author">
+        <element name="author">
+            <text/>
+            <ref name="att.global.attribute.xmlid"/>
+            <ref name="att.global.attribute.n"/>
+        </element>
+
+    </define>
+    <define name="title">
+        <element name="title">
+            <optional>
+                <attribute name="level">
+                    <a:documentation>(level of title) indicates the kind of title values include: a
+                        (article), j (journal), b (book), w (website)</a:documentation>
+                    <choice>
+                        <value>a</value>
+                        <a:documentation>title of article (in a journal, collection, anthology, or
+                            website)</a:documentation>
+                        <value>j</value>
+                        <a:documentation>title of journal, collection or anthology</a:documentation>
+                        <value>b</value>
+                        <a:documentation>title of book</a:documentation>
+                        <value>w</value>
+                        <a:documentation>title of website</a:documentation>
+                    </choice>
+                </attribute>
+            </optional>
+            <text/>
+        </element>
+    </define>
+    <define name="p">
+        <element name="p">
+            <a:documentation>(paragraph) a division of text indicating a
+                paragraph.</a:documentation>
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>
+        </element>
+    </define>
+    <define name="div">
+        <element name="div">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.divPart"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>
+        </element>
+    </define>
+    <define name="reviewer">
+        <element name="reviewer">
+            <optional>
+                <text/>
+            </optional>
+            <ref name="att.review.type"/>
+            <ref name="att.global.attributes"/>
+        </element>
+    </define>
+    <define name="report">
+        <element name="report">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.divPart"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.typed.attributes"/>
+            <ref name="att.global.attributes"/>
+        </element>
+    </define>
+    <define name="docReview">
+        <element name="docReview">
+            <oneOrMore>
+                <choice>
+                    <ref name="model.global"/>
+                    <group>
+                        <ref name="reviewer"/>
+                        <ref name="report"/>
+                    </group>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="docFoot">
+        <element name="docFoot">
+            <zeroOrMore>
+                <ref name="model.biblLike"/>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="body">
+        <element name="body">
+            <zeroOrMore>
+                <ref name="model.divLike"/>
+            </zeroOrMore>
+        </element>
+    </define>
+
+    <!--student-defined module (1): annotated bibliography-->
+
+    <define name="annotated_bib">
+        <element name="annotated_bib">
+            <a:documentation>(annotated bibliography) container element for writing project 1;
+                includes a problem statement and at least one group of citation and annotation
+                elements</a:documentation>
+            <ref name="problem_stmt"/>
+            <zeroOrMore>
+                <group>
+                    <ref name="model.biblLike"/>
+                    <ref name="annotation"/>
+                </group>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="problem_stmt">
+        <element name="problem_stmt">
+            <a:documentation>(problem statement) contains the problem statement for which the
+                citations and annotations are relevant</a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="model.biblLike">
+        <choice>
+            <ref name="citation"/>
+            <!--<ref name="listBibl"/>-->
+        </choice>
+    </define>
+    <define name="citation">
+        <element name="citation">
+            <a:documentation>(citation) a properly cited document [use @n attribute for ordering;
+                @style element for citation style]</a:documentation>
+            <oneOrMore>
+                <choice>
+                    <text/>
+                    <ref name="author"/>
+                    <ref name="title"/>
+                </choice>
+                <optional>
+                    <ref name="model.ptrLike"/>
+                </optional>
+            </oneOrMore>
+            <ref name="att.global.attribute.n"/>
+            <attribute name="style">
+                <a:documentation>(citation style) APA or IEEE</a:documentation>
+                <choice>
+                    <value>APA</value>
+                    <value>IEEE</value>
+                    <value>MLA</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="model.ptrLike">
+        <choice>
+            <ref name="ref"/>
+        </choice>
+    </define>
+    <define name="ref">
+        <element name="ref">
+            <a:documentation>(reference) defines a reference to another location</a:documentation>
+            <data type="anyURI"/>
+        </element>
+    </define>
+    <define name="annotation">
+        <element name="annotation">
+            <a:documentation>(annotation) must follow a citation element</a:documentation>
+            <optional>
+                <ref name="model.global"/>
+            </optional>
+            <group>
+
+                <interleave>
+                    <zeroOrMore>
+                        <ref name="macro.paraContent"/>
+                    </zeroOrMore>
+                    <oneOrMore>
+                        <ref name="background"/>
+                    </oneOrMore>
+                </interleave>
+                <interleave>
+                    <zeroOrMore>
+                        <ref name="macro.paraContent"/>
+                    </zeroOrMore>
+                    <oneOrMore>
+                        <ref name="summary"/>
+                    </oneOrMore>
+                </interleave>
+                <interleave>
+                    <zeroOrMore>
+                        <ref name="macro.paraContent"/>
+                    </zeroOrMore>
+                    <oneOrMore>
+                        <ref name="relevance"/>
+                    </oneOrMore>
+                </interleave>
+            </group>
+            <optional>
+                <ref name="model.global"/>
+            </optional>
+        </element>
+    </define>
+    <define name="background">
+        <element name="background">
+            <a:documentation>(background information) anything that could help provide context or
+                information with regard to the source you are using; can contain text, and optional
+                q elements [requires @type element] </a:documentation>
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+            <attribute name="type">
+                <a:documentation>(type of background information) suggested values include: author
+                    and source</a:documentation>
+                <choice>
+                    <value>author</value>
+                    <a:documentation>Information pertaining to the author or authors of the source
+                        (credentials, education, profession, etc.)</a:documentation>
+                    <value>source</value>
+                    <a:documentation>Information pertaining to the source (publication information,
+                        popularity, etc.)</a:documentation>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="summary">
+        <element name="summary">
+            <a:documentation>(summary) summarization of the source, can be general information,
+                interpretive summary, and/or summary of the research approach; can contain text,
+                notes, and optional q elements [requires @type element]</a:documentation>
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+            <attribute name="type">
+                <a:documentation>(type of summary) suggested values include: general,
+                    interpretation, and approach</a:documentation>
+                <choice>
+                    <value>general</value>
+                    <a:documentation>a broad recount of source material or overview </a:documentation>
+                    <value>interpretation</value>
+                    <a:documentation>the reader’s interpretation of the source; the takeaway from
+                        the source </a:documentation>
+                    <value>approach</value>
+                    <a:documentation>how the source represents a discipline-specific
+                        approach</a:documentation>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="relevance">
+        <element name="relevance">
+            <a:documentation>(relevance) where the source can be used and why the text may be
+                pertinent to the problem statement; can contain text [requires @type
+                attribute]</a:documentation>
+            <oneOrMore>
+                <ref name="macro.paraContent"/>
+            </oneOrMore>
+            <attribute name="type">
+                <a:documentation>(type of relevance) suggested values include: value_stmt and
+                    application</a:documentation>
+                <choice>
+                    <value>value_stmt</value>
+                    <a:documentation>(value statement) subjective critique of quality of the source </a:documentation>
+                    <value>application</value>
+                    <a:documentation>(application) the intended audience or recommendations for
+                        where the text may be useful </a:documentation>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="approach">
+        <element name="approach">
+            <a:documentation>define approach</a:documentation>
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="interpretation">
+        <element name="interpretation">
+            <a:documentation>define interpretation</a:documentation>
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="value_stmt">
+        <element name="value_stmt">
+            <a:documentation>(value statement) define</a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="application">
+        <element name="application">
+            <a:documentation>define application</a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="model.qLike">
+        <choice>
+            <ref name="q"/>
+        </choice>
+    </define>
+    <define name="q">
+        <element name="q">
+            <a:documentation>(quote) quoted text.</a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <!--end annotated bibliography definitions-->
+
+    <define name="docHead">
+        <element name="docHead">
+            <group>
+                <interleave>
+                    <ref name="title"/>
+                    <ref name="author"/>
+                    <oneOrMore>
+                        <ref name="version"/>
+                    </oneOrMore>
+                    <zeroOrMore>
+                        <ref name="model.global"/>
+                    </zeroOrMore>
+                </interleave>
+            </group>
+
+
+        </element>
+    </define>
+    <define name="DOC">
+        <element name="DOC">
+            <group>
+                <ref name="docHead"/>
+                <choice>
+                    <!--<ref name="body"/> 
+                        not needed yet, if at all -->
+                    <ref name="annotated_bib"/>
+                </choice>
+                <optional>
+                    <ref name="docFoot"/>
+                </optional>
+                <optional>
+                    <ref name="docReview"/>
+                </optional>
+            </group>
+            <ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>
+        </element>
+    </define>
+
+    <start>
+        <ref name="DOC"/>
+    </start>
+</grammar>
