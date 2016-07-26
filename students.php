@@ -35,7 +35,6 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
-
                 <article>
 
                       <header>
@@ -52,10 +51,27 @@
                         </p>
                   </section>
                 </article>
-                    <aside>
-                        <h3>Project page</h3>
-                        <p>This is a project page for AWD3302. As you complete individual writing projects 1-3, this page will be populated with links to the transformed views of the XML documents that you push to GitHub.</p>
-                    </aside>
+                <aside>
+                    <h3>Project page</h3>
+                    <p>This is a project page for AWD3302. As you complete individual writing projects 1-3, this page will be populated with links to the transformed views of the XML documents that you push to GitHub.</p>
+                </aside>
+                <article>
+
+                      <header>
+                        <h2>Project 2</h1>
+                      </header>
+                      <section>
+                        <p>
+                          <ul class="students">
+                            <?php
+                            $proj=2;
+                            include('list_students.php')
+                            ?>
+                          </ul>
+                        </p>
+                  </section>
+                </article>
+
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
