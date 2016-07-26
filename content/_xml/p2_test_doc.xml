@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../schema_3302.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<!--the second line in the document associates the schema, so be sure not to change it-->
+<DOC>
+    <docHead>
+        <!--required header includes metadata about the assignment (title, author, version)-->
+        <title>Title of Assignment</title>
+        <author xml:id="your_id_here">Your name here</author>
+        <version n="num_of_version" date="2016-01-01"/>
+    </docHead>
+    
+<!--paste body of your template file here-->
+        
+    <docReview>
+        <reviewer type="peer" xml:id="peer_id_here"/>
+        <report type="peer" resp="#peer_id_here">
+            <p>Peer review report will appear here.</p>
+        </report>
+        <reviewer type="instructor" xml:id="kgs"/>
+        <report type="instructor" resp="#kgs">
+            <p>Comments on assignment will appear here.</p>
+        </report>
+    </docReview>
+</DOC>
