@@ -28,15 +28,18 @@
         <article class="project">
 
 <header>
-            <h3>Project 1</h3>
+
+
             <?php
             $proj = $_GET['proj'];
             $id = $_GET['id'];
+            echo '<h3>Project ' .$proj. '</h3>';
             if(isset($_GET['id'])) {
               $_GET['id'];
-              echo '<p>You are viewing student id: ' . $id . ', to select another student, return to the <a href=\'./students.php\'>Student Page</a><p>';
+              echo '<h4>Student id: ' . $id . '</h4>';
+              echo '<p>To select another student or project, return to the <a href=\'./students.php\'>Project Page</a>.<p>';
             } else {
-              echo '<p>No student selected, please return to <a href=\'./students.php\'>Student Page</a></p>';
+              echo '<p>No student selected, please return to <a href=\'./students.php\'>Project Page</a>.</p>';
             }   ?>
             <p>
 
