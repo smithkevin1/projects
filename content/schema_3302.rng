@@ -19,7 +19,7 @@
     <define name="att.review.type">
         <optional>
             <attribute name="type">
-                <a:documentation>(type of reviewer) sugggested values are 'peer' or
+                <a:documentation>(type of reviewer) suggested values are 'peer' or
                     'instructor'</a:documentation>
                 <data type="string"/>
             </attribute>
@@ -191,7 +191,7 @@
         <element name="note">
             <a:documentation>contains a note made on the text intended to provide additional
                 information or comment upon the text; requires a @type attribute and a @resp
-                (resposibile party) attribute with your id for peer reviewer note</a:documentation>
+                (responsible party) attribute with your id for peer reviewer note</a:documentation>
             <optional>
                 <ref name="att.global.attributes"/>
             </optional>
@@ -284,8 +284,9 @@
             <a:documentation>(paragraph) a division of text indicating a
                 paragraph.</a:documentation>
             <ref name="macro.paraContent"/>
-            <ref name="att.global.attributes"/>
-            <ref name="att.typed.attributes"/>
+            <ref name="att.global.attribute.n"/>
+            <!--<ref name="att.global.attributes"/>
+            <ref name="att.typed.attributes"/>-->
         </element>
     </define>
     <define name="div">
@@ -466,11 +467,12 @@
                     and source</a:documentation>
                 <choice>
                     <value>author</value>
-                    <a:documentation>Information pertaining to the author or authors of the source
-                        (credentials, education, profession, etc.)</a:documentation>
+                    <a:documentation>(author background) information pertaining to the author or
+                        authors of the source (credentials, education, profession,
+                        etc.)</a:documentation>
                     <value>source</value>
-                    <a:documentation>Information pertaining to the source (publication information,
-                        popularity, etc.)</a:documentation>
+                    <a:documentation>(source background) information pertaining to the source
+                        (publication information, popularity, etc.)</a:documentation>
                     <data type="token">
                         <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
                     </data>
@@ -579,6 +581,1064 @@
     </define>
     <!--end annotated bibliography definitions-->
 
+
+    <!-- Group 1: science blog posts -->
+
+    <define name="section_header">
+        <element name="section_header">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="visual">
+        <element name="visual">
+            <ref name="macro.paraContent"/>
+            <ref name="att.resourced.attribute.url"/>
+            <attribute name="type">
+                <a:documentation>Types can be: Photo, Comic, Drawing, Animation, Quoted Text,
+                    Other</a:documentation>
+                <choice>
+                    <value>photo</value>
+                    <a:documentation/>
+                    <value>comic</value>
+                    <a:documentation/>
+                    <value>drawing</value>
+                    <a:documentation/>
+                    <value>animation</value>
+                    <a:documentation/>
+                    <value>quoted_text</value>
+                    <value>other</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="analogy">
+        <element name="analogy">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="roadmap">
+        <element name="roadmap">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="important_idea">
+        <element name="important_idea">
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="blog.ref">
+        <element name="ref">
+            <a:documentation>Hyperlink around a phrase that directs to a source or resource, can be
+                found throughout the post depending on author's preference</a:documentation>
+            <ref name="macro.paraContent"/>
+            <ref name="att.resourced.attribute.url"/>
+            <attribute name="type">
+                <a:documentation>Types can be "source" or "supplement" for source material or
+                    supplemental material</a:documentation>
+                <choice>
+                    <value>source</value>
+                    <a:documentation>source material</a:documentation>
+                    <value>supplement</value>
+                    <a:documentation>supplemental material</a:documentation>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="pb">
+        <element name="pb">
+            <ref name="att.global.attribute.n"/>
+            <empty/>
+        </element>
+    </define>
+    <define name="model.blog.global">
+        <zeroOrMore>
+            <choice>
+                <ref name="section_header"/>
+                <ref name="visual"/>
+                <ref name="analogy"/>
+                <ref name="roadmap"/>
+                <ref name="important_idea"/>
+                <ref name="blog.ref"/>
+                <ref name="pb"/>
+                <ref name="macro.paraContent"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+
+    <define name="fundamental_science_involved">
+        <element name="fundamental_science_involved">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="question_relevant_topic">
+        <element name="question_relevant_topic">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="explanation">
+        <element name="explanation">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="conclusion">
+        <element name="conclusion">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="blog.answer.content">
+        <group>
+            <interleave>
+                <zeroOrMore>
+                    <ref name="model.blog.global"/>
+                </zeroOrMore>
+                <oneOrMore>
+                    <ref name="fundamental_science_involved"/>
+                </oneOrMore>
+                <oneOrMore>
+                    <ref name="question_relevant_topic"/>
+                </oneOrMore>
+                <oneOrMore>
+                    <ref name="explanation"/>
+                </oneOrMore>
+                <ref name="conclusion"/>
+            </interleave>
+        </group>
+    </define>
+    <define name="answer">
+        <element name="answer">
+            <oneOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                    <ref name="blog.answer.content"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="question">
+        <element name="question">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="scientific_principle">
+        <element name="scientific_principle">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="misconceptions">
+        <element name="misconceptions">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </zeroOrMore>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="blog.background.content">
+        <group>
+            <interleave>
+                <zeroOrMore>
+                    <ref name="model.blog.global"/>
+                </zeroOrMore>
+                <ref name="question"/>
+                <oneOrMore>
+                    <ref name="scientific_principle"/>
+                </oneOrMore>
+                <zeroOrMore>
+                    <ref name="misconceptions"/>
+                </zeroOrMore>
+            </interleave>
+        </group>
+    </define>
+    <define name="blog.background">
+        <element name="background">
+            <oneOrMore>
+                <choice>
+                    <ref name="model.blog.global"/>
+                    <ref name="macro.paraContent"/>
+                    <ref name="blog.background.content"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+
+    <define name="sources">
+        <element name="sources">
+            <zeroOrMore>
+                <choice>
+                    <ref name="model.biblLike"/>
+                    <ref name="model.blog.global"/>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="model.blog.content">
+        <group>
+            <ref name="blog.background"/>
+            <optional>
+                <ref name="model.blog.global"/>
+            </optional>
+            <ref name="answer"/>
+            <optional>
+                <ref name="model.blog.global"/>
+            </optional>
+            <ref name="sources"/>
+        </group>
+    </define>
+    <define name="blog_post">
+        <element name="blog_post">
+            <optional>
+                <ref name="model.blog.global"/>
+            </optional>
+            <ref name="model.blog.content"/>
+            <optional>
+                <ref name="model.blog.global"/>
+            </optional>
+
+        </element>
+    </define>
+    <!-- end group 1 definitions -->
+
+    <!-- Group 2: Feasibility reports -->
+    <define name="model.imgLike">
+        <optional>
+            <ref name="macro.paraContent"/>
+        </optional>
+        <ref name="att.resourced.attribute.url"/>
+    </define>
+    <define name="logo">
+        <element name="logo">
+            <ref name="model.imgLike"/>
+        </element>
+    </define>
+    <define name="contributors">
+        <element name="contributors">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="subTitle">
+        <element name="subTitle">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="date">
+        <element name="date">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="model.ttl">
+
+        <interleave>
+            <ref name="title"/>
+            <optional>
+                <ref name="subTitle"/>
+            </optional>
+            <ref name="date"/>
+            <ref name="contributors"/>
+            <optional>
+                <ref name="logo"/>
+            </optional>
+        </interleave>
+    </define>
+    <define name="model.tbl_contents">
+        <element name="sect">
+            <a:documentation>(Section) is an element for each listing in the &lt;tbl_contents&gt;
+                [requires a mandatory @num attribute and an optional @lvl (level) attribute denoting
+                its level in the hierarchy]. A &lt;sect&gt; element with @lvl=1 will be numbered
+                with a roman numeral corresponding to its native @num attribute. A &lt;sect&gt;
+                element which has @lvl=2 will be lettered corresponding to its native @num attribute
+                (@num=1 shows A, @num=2 shows B, etc) and indented below its parent. A &lt;sect&gt;
+                element @lvl=3 will be denoted with its native @num attribute and indented twice
+                below its parent. Each use of a sub level begins again at @num=1.</a:documentation>
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attribute.n"/>
+            <optional>
+                <attribute name="lvl">
+                    <a:documentation>(level) attribute denoting its level in the hierarchy]. A
+                        &lt;sect&gt; element with @lvl=1 will be numbered with a roman numeral
+                        corresponding to its native @num attribute. A &lt;sect&gt; element which has
+                        @lvl=2 will be lettered corresponding to its native @num attribute (@num=1
+                        shows A, @num=2 shows B, etc) and indented below its parent. A &lt;sect&gt;
+                        element @lvl=3 will be denoted with its native @num attribute and indented
+                        twice below its parent. Each use of a sub level begins again at
+                        @num=1.</a:documentation>
+                    <data type="int"/>
+                </attribute>
+            </optional>
+        </element>
+    </define>
+    <define name="app_ovr">
+        <element name="app_ovr">
+            <a:documentation>(Application overview) a highlight of certain element of the
+                application. This can be anything from you/your team's goals to how it interacts
+                with other products, projects, and systems. [requires an @type attribute]. Available
+                types: obj, synergy, rls. </a:documentation>
+            <ref name="macro.paraContent"/>
+            <attribute name="type">
+                <a:documentation>type of application overview</a:documentation>
+                <choice>
+                    <value>obj</value>
+                    <a:documentation>referencing a personal, team, social, or business
+                        objective</a:documentation>
+                    <value>synergy</value>
+                    <a:documentation>referencing the way your project will interact with any type of
+                        existing infrastructure</a:documentation>
+                    <value>rls</value>
+                    <a:documentation>referencing the any rules or regulations the project will
+                        encounter whether for better or worse</a:documentation>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="model.pre_req_ana">
+        <oneOrMore>
+            <ref name="app_ovr"/>
+        </oneOrMore>
+    </define>
+    <define name="fsb_hlgt">
+        <element name="fsb_hlgt">
+            <a:documentation>(feasibility highlight) Body of this element is the general summary of
+                this aspect of feasibility [required @type attribute and @n attribute] available
+                types: @tcnl (technical), @econ (economic), @tfrm (timeframe), @socl (public
+                reception), @suits (legality), or @envr (environmental).</a:documentation>
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attribute.n"/>
+            <attribute name="type">
+                <a:documentation>available types: @tcnl (technical), @econ (economic), @tfrm
+                    (timeframe), @socl (public reception), @suits (legality), or @envr
+                    (environmental)</a:documentation>
+                <choice>
+                    <value>tcnl</value>
+                    <a:documentation>(technical)</a:documentation>
+                    <value>econ</value>
+                    <a:documentation>(economic)</a:documentation>
+                    <value>socl</value>
+                    <a:documentation>(public reception)</a:documentation>
+                    <value>suits</value>
+                    <a:documentation>(legality)</a:documentation>
+                    <value>envr</value>
+                    <a:documentation>(environmental)</a:documentation>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="model.fsb">
+        <oneOrMore>
+            <ref name="fsb_hlgt"/>
+        </oneOrMore>
+    </define>
+    <define name="req">
+        <element name="req">
+            <a:documentation>(requirement). This is a requirement. [required @num attribute].
+                Although not strictly a technical requirement, this is used to detail certain </a:documentation>
+            <ref name="att.global.attribute.n"/>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="req_sect">
+        <element name="req_sect">
+            <a:documentation>(requirement section) details a sections of requirements. Strictly
+                related to the project’s components. For example an appropriate &lt;req_sect&gt;
+                element would be “userinterface”, “Database/database interaction”, or
+                “construction”. A &lt;req_sect&gt; element is simple an italicized above each of its
+                requirement. </a:documentation>
+            <oneOrMore>
+                <choice>
+                    <ref name="req"/>
+                    <ref name="macro.paraContent"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="model.sccs_crt">
+        <ref name="req_sect"/>
+    </define>
+    <define name="img">
+        <element name="img">
+            <ref name="model.imgLike"/>
+        </element>
+    </define>
+    <define name="model.dsn">
+        <ref name="img"/>
+    </define>
+    <define name="est">
+        <element name="est">
+            <a:documentation>The &lt;est&gt; element represents an estimated cost [required @type
+                attribute]. Available @types: inst (institutional), envr (environmental), lgl
+                (legal), fnc (financial).</a:documentation>
+            <ref name="macro.paraContent"/>
+            <attribute name="type">
+                <choice>
+                    <value>inst</value>
+                    <a:documentation>(institutional)</a:documentation>
+                    <value>envr</value>
+                    <a:documentation>(environmental)</a:documentation>
+                    <value>lgl</value>
+                    <a:documentation>(legal)</a:documentation>
+                    <value>fnc</value>
+                    <a:documentation>(financial)</a:documentation>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="model.cost">
+        <oneOrMore>
+            <ref name="est"/>
+        </oneOrMore>
+    </define>
+    <define name="tmln">
+        <element name="tmln">
+            <a:documentation>(Timeline) The tmln element is an optional element design to provide a
+                timeline entry [required @date (written in mm/dd/yyyy) and @num] attribute. Date
+                will be highlighted in bold with the text following it. Each &lt;tmln&gt; will have
+                a line between them of blank space. </a:documentation>
+            <ref name="att.global.attribute.n"/>
+            <attribute name="date">
+                <a:documentation>This is the date of this version (n) of the text you are working
+                    on.</a:documentation>
+                <data type="date"/>
+            </attribute>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="model.rpt">
+        <oneOrMore>
+            <choice>
+                <ref name="macro.paraContent"/>
+                <ref name="tmln"/>
+            </choice>
+        </oneOrMore>
+    </define>
+    <define name="fnc">
+        <element name="fnc">
+            <a:documentation>(financial highlight). [required @num, and @type attribute] example
+                @types: @fund (Funding), @lns (loans), @exp (expenses), @brdn (Burden to company /
+                organization).</a:documentation>
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attribute.n"/>
+            <attribute name="type">
+                <choice>
+                    <value>fund</value>
+                    <a:documentation>(Funding)</a:documentation>
+                    <value>lns</value>
+                    <a:documentation>(loans)</a:documentation>
+                    <value>exp</value>
+                    <a:documentation>(expenses)</a:documentation>
+                    <value>brdn</value>
+                    <a:documentation>(Burden to company / organization)</a:documentation>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="model.fnc">
+        <zeroOrMore>
+            <ref name="fnc"/>
+        </zeroOrMore>
+    </define>
+    <define name="fsb">
+        <element name="fsb">
+            <a:documentation>This element is used to answer your thoughts on the question “Is it
+                feasible” and why.</a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="cond">
+        <element name="cond">
+            <a:documentation>This element is used to identify the key conditions for feasibility.
+                Such as meeting a timeframe or extended financial support. Maybe even address
+                certain doubts on the feasibility. </a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="sum">
+        <element name="sum">
+            <a:documentation>This element summarizes the whole report. </a:documentation>
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="model.conc">
+        <ref name="fsb"/>
+        <ref name="cond"/>
+        <ref name="sum"/>
+    </define>
+
+    <define name="macro.pageContent">
+        <!-- uses co-occurence constraints to control available children of <page> based on @type attribute -->
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>ttl</value>
+                    <a:documentation>(Title) contains a mandatory Title, date of submission, and
+                        list of contributors. Logo and sub-title optional. </a:documentation>
+                </attribute>
+                <oneOrMore>
+                    <ref name="model.ttl"/>
+                </oneOrMore>
+            </element>
+        </zeroOrMore>
+
+
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>tbl_contents</value>
+                    <a:documentation>(Table of Contents) contains any number of &lt;sect&gt;
+                        elements. </a:documentation>
+                </attribute>
+                <oneOrMore>
+                    <ref name="model.tbl_contents"/>
+                </oneOrMore>
+            </element>
+        </zeroOrMore>
+
+
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>exec_sum</value>
+                    <a:documentation>(Executive Summary) [Requires @type attribute] a quick summary
+                        of the whole presentation. From these paragraphs you should be able to
+                        understand whether or not the author supports the project, the most critical
+                        limitations / benefits where applicable, and </a:documentation>
+                </attribute>
+                <ref name="macro.paraContent"/>
+            </element>
+        </zeroOrMore>
+
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>pre_req_ana</value>
+                    <a:documentation>(Preliminary requirements analysis) This page type contains the
+                        evaluation of the environment for the project before beginning it. Contains
+                        any number of &lt;app_ovr&gt; elements.</a:documentation>
+                </attribute>
+                <ref name="model.pre_req_ana"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>fsb</value>
+                    <a:documentation>(feasibility) This page type Contains any number of
+                        &lt;fsb_stud&gt; elements. Bulk of the total report.</a:documentation>
+                </attribute>
+                <ref name="model.fsb"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>sccs_crt</value>
+                    <a:documentation>(Success criteria). This pages contains the pre-defined
+                        requirements for the project to be declared successful. Contains any number
+                        of &lt;req_sect&gt; elements. Easy to confuse with the page @pre_req_ana, or
+                        the preliminary requirements analysis. This page contains the technical
+                        aspects describing the actual project rather than the environment
+                        surrounding the project and it’s success. </a:documentation>
+                </attribute>
+                <ref name="model.sccs_crt"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>dsn</value>
+                    <a:documentation>(Design or Diagram). This type of page is a diagram or image
+                        that shows a quick highlight of the system / structure. Usually outline
+                        interconnecting parts.</a:documentation>
+                </attribute>
+                <ref name="model.dsn"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>cost</value>
+                    <a:documentation>(Cost Estimates) The Cost estimates page contains any number of
+                        &lt;est&gt; elements</a:documentation>
+                </attribute>
+                <ref name="model.cost"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>rpt</value>
+                    <a:documentation>(Report page) Not to be mistake with an estimate, this page is
+                        about outlining how you show or prove progress on your project and how you
+                        will report that progress. Examples include the medium / genre for your
+                        report. Who you are reporting too, and what deliverables you will have.
+                        Deliverables could include a tour a facility / physical project, or an
+                        interactive demo of software. Includes any number of &lt;tmln&gt;
+                        elements.</a:documentation>
+                </attribute>
+                <ref name="model.rpt"/>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>rsk_ana</value>
+                    <a:documentation>(Risk Analysis) chart/graphics/paragraph dedicated to covering
+                        certain risks and how your project will avoid them </a:documentation>
+                </attribute>
+                <oneOrMore>
+                    <choice>
+                        <ref name="macro.paraContent"/>
+                        <ref name="img"/>
+                    </choice>
+                </oneOrMore>
+            </element>
+        </zeroOrMore>
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>fnc</value>
+                    <a:documentation>(Financial) This page is for a detailed financing plan if
+                        necessary. May be covered already by previous sections if not as detailed.
+                    </a:documentation>
+                </attribute>
+                <ref name="model.fnc"/>
+            </element>
+        </zeroOrMore>
+
+        <zeroOrMore>
+            <element name="page">
+                <a:documentation>Representing any page of the feasibility report. [required @type
+                    attribute] Available types: @ttl, @tbl_contents, @exec_sum, @pre_req_ana, @fsb,
+                    @sccs_crt, @dsn, @cost, @rpt, @rsk_ana, @fnc, and @conc.</a:documentation>
+                <attribute name="type">
+                    <value>conc</value>
+                    <a:documentation>(Conclusion) The conclusion page consists of a body of writing
+                        that is three parts. It contains one of each of the following elements: fsb,
+                        cond, and sum. This page should be very direct and to the point
+                    </a:documentation>
+                </attribute>
+                <ref name="model.conc"/>
+            </element>
+        </zeroOrMore>
+
+    </define>
+    <define name="fsb_rpt">
+        <element name="fsb_rpt">
+            <a:documentation>(Feasibility Report) container element for writing project 2. Contains
+                any number of pages. Cannot contain text by itself. Can only contain text in
+                pages.</a:documentation>
+            <ref name="macro.pageContent"/>
+        </element>
+    </define>
+    <!-- end group 2 definitions -->
+
+
+    <!-- Group 3: public initiative proposal -->
+    <define name="submit_date">
+        <element name="submit_date">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="audience">
+        <element name="audience">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="proposal.cover_page.content">
+        <ref name="title"/>
+        <ref name="author"/>
+        <ref name="submit_date"/>
+        <ref name="audience"/>
+    </define>
+    <define name="cover_page">
+        <element name="cover_page">
+            <ref name="proposal.cover_page.content"/>
+        </element>
+    </define>
+    <define name="section">
+        <element name="section">
+            <ref name="macro.paraContent"/>
+            <ref name="att.global.attribute.n"/>
+        </element>
+    </define>
+    <define name="tbl_cont">
+        <element name="tbl_cont">
+            <oneOrMore>
+                <ref name="section"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="intro">
+        <element name="intro">
+            <ref name="model.pLike"/>
+            <attribute name="type">
+                <choice>
+                    <value>ltr_int</value>
+                    <value>exec_sum</value>
+                    <value>abstract</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="crnt_cond">
+        <element name="crnt_cond">
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="subj_hist">
+        <element name="subj_hist">
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="proposal.background.content">
+        <zeroOrMore>
+            <choice>
+                <ref name="macro.paraContent"/>
+                <ref name="crnt_cond"/>
+                <ref name="subj_hist"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="proposal.background">
+        <element name="background">
+            <oneOrMore>
+                <element name="p">
+                    <ref name="proposal.background.content"/>
+                </element>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="scope">
+        <element name="scope">
+            <ref name="macro.paraContent"/>
+            <attribute name="type">
+                <choice>
+                    <value>who</value>
+                    <value>what</value>
+                    <value>when</value>
+                    <value>where</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="objective">
+        <element name="objective">
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="goal">
+        <element name="goal">
+            <oneOrMore>
+                <choice>
+                    <ref name="macro.paraContent"/>
+                    <ref name="model.qLike"/>
+                </choice>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="proposal.purpose.content">
+        <zeroOrMore>
+            <choice>
+                <ref name="scope"/>
+                <ref name="objective"/>
+                <ref name="goal"/>
+                <ref name="macro.paraContent"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="proposal.purpose">
+        <element name="purpose">
+            <oneOrMore>
+                <element name="p">
+                    <ref name="proposal.purpose.content"/>
+                </element>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="proposal.approach">
+        <element name="approach">
+            <ref name="model.pLike"/>
+            <attribute name="type">
+                <choice>
+                    <value>execution</value>
+                    <value>action</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="feasibility">
+        <element name="feasibility">
+            <ref name="model.pLike"/>
+            <attribute name="type">
+                <choice>
+                    <value>economic</value>
+                    <value>social</value>
+                    <value>environmental</value>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="conclu">
+        <element name="conclu">
+            <ref name="model.pLike"/>
+        </element>
+    </define>
+    <define name="references">
+        <element name="references">
+            <ref name="model.biblLike"/>
+        </element>
+    </define>
+    <define name="model.proposal.content">
+        <group>
+            <ref name="cover_page"/>
+            <ref name="tbl_cont"/>
+            <ref name="intro"/>
+            <ref name="proposal.background"/>
+            <ref name="proposal.purpose"/>
+            <ref name="proposal.approach"/>
+            <ref name="feasibility"/>
+            <ref name="conclu"/>
+            <ref name="references"/>
+        </group>
+    </define>
+    <define name="pub_init_proposal">
+        <element name="pub_init_proposal">
+            <ref name="model.proposal.content"/>
+        </element>
+    </define>
+    <!-- end group 3 definitions -->
+
+    <!-- Group 4: Cover letter -->
+
+    <define name="name">
+        <element name="name">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="contact">
+        <element name="contact">
+            <ref name="macro.paraContent"/>
+            <attribute name="type">
+                <choice>
+                    <value>address</value>
+                    <value>phone</value>
+                    <value>email</value>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="contact_info">
+        <element name="contact_info">
+            <oneOrMore>
+                <ref name="contact"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="header">
+        <element name="header">
+            <ref name="name"/>
+            <ref name="contact_info"/>
+        </element>
+    </define>
+    <define name="greeting">
+        <element name="greeting">
+            <text/>
+        </element>
+    </define>
+    <define name="intent">
+        <oneOrMore>
+            <element name="intent">
+                <attribute name="type">
+                    <value>purpose</value>
+                </attribute>
+                <ref name="macro.paraContent"/>
+            </element>
+        </oneOrMore>
+        <zeroOrMore>
+            <element name="intent">
+                <attribute name="type">
+                    <value>connection</value>
+                </attribute>
+                <ref name="macro.paraContent"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="reason">
+        <element name="reason">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="proposition">
+        <element name="proposition">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="intro_para">
+        <element name="intro_para">
+            <interleave>
+                <ref name="intent"/>
+                <optional>
+                    <ref name="reason"/>
+                </optional>
+                <ref name="proposition"/>
+                <zeroOrMore>
+                    <ref name="macro.paraContent"/>
+                </zeroOrMore>
+            </interleave>
+        </element>
+    </define>
+    <define name="experience">
+        <element name="experience">
+            <ref name="macro.paraContent"/>
+            <attribute name="type">
+                <choice>
+                    <value>work</value>
+                    <value>personal</value>
+                    <value>school</value>
+                    <data type="token">
+                        <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </element>
+    </define>
+    <define name="para_background">
+        <element name="para_background">
+            <oneOrMore>
+                <ref name="experience"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="compatability">
+        <element name="compatability">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="next_step">
+        <element name="next_step">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="para_closing">
+        <element name="para_closing">
+            <ref name="compatability"/>
+            <ref name="next_step"/>
+        </element>
+    </define>
+    <define name="salutation">
+        <element name="salutation">
+            <ref name="macro.paraContent"/>
+        </element>
+    </define>
+    <define name="signature">
+        <element name="signature">
+            <ref name="salutation"/>
+            <ref name="name"/>
+        </element>
+    </define>
+    <define name="cover_letter">
+        <element name="cover_letter">
+            <ref name="header"/>
+            <ref name="greeting"/>
+            <ref name="intro_para"/>
+            <oneOrMore>
+                <ref name="para_background"/>
+            </oneOrMore>
+            <ref name="para_closing"/>
+            <ref name="signature"/>
+        </element>
+    </define>
+    <!-- end group 4 definitions -->
+
     <define name="docHead">
         <element name="docHead">
             <group>
@@ -601,11 +1661,15 @@
         <element name="DOC">
             <group>
                 <ref name="docHead"/>
-                <choice>
+                <oneOrMore><choice>
                     <!--<ref name="body"/> 
                         not needed yet, if at all -->
                     <ref name="annotated_bib"/>
-                </choice>
+                    <ref name="blog_post"/>
+                    <ref name="fsb_rpt"/>
+                    <ref name="pub_init_proposal"/>
+                    <ref name="cover_letter"/>
+                </choice></oneOrMore>
                 <optional>
                     <ref name="docFoot"/>
                 </optional>
