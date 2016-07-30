@@ -54,17 +54,17 @@
         </p>
     </xsl:template>
     
-    <xsl:template match="annotated_bib//citation">
+    <xsl:template match="DOC//citation">
         <p class="citation">
-            <strong><xsl:apply-templates/></strong>
+            <xsl:apply-templates/>
         </p>
     </xsl:template>
     
-    <xsl:template match="annotated_bib//title">
+    <xsl:template match="DOC//title">
         <xsl:choose>
             <xsl:when test="./@level='a'">
             <xsl:apply-templates/>
-        </xsl:when>
+            </xsl:when>
         <xsl:otherwise>
             <span class="italics"><xsl:apply-templates></xsl:apply-templates></span>
         </xsl:otherwise>
@@ -126,12 +126,35 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="blog_post//visual">
-        
+    <xsl:template match="blog_post//background">
+        <div class="blog.background">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="blog_post//answer">
+        <div class="blog.answer">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+        <!-- global elements -->
+    <xsl:template match="blog_post//pb">
+        <br/><br/>
+    </xsl:template>
+    <xsl:template match="blog_post//visual">       
         <img src="{@url}" alt="{child::text()}" />
     </xsl:template>
     <xsl:template match="blog_post//ref">       
         <a href="{@url}" alt="{@type}" ><xsl:apply-templates/></a>
+    </xsl:template>
+    <xsl:template match="blog_post//section_header">
+        <h3><xsl:apply-templates></xsl:apply-templates></h3>
+    </xsl:template>
+    <xsl:template match="blog_post//roadmap">
+        <ul>
+            <xsl:for-each select="child::section_header">
+                <li><xsl:apply-templates/></li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
     
    <!-- templates for feasibility reports -->
