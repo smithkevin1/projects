@@ -158,18 +158,11 @@
     </xsl:template>
     
    <!-- templates for feasibility reports -->
-    <!--<xsl:template match="DOC//fsb_rpt">
+    <xsl:template match="DOC//fsb_rpt">
         <div id="fsb_rpt">
-            <xsl:for-each select="./page">
-                <xsl:variable name="type" select="@type"/>
-                <div class="page" id="{$type}">
-                    <xsl:for-each select="child::*">
-                        <p><xsl:apply-templates/></p>
-                    </xsl:for-each>                  
-                </div>
-            </xsl:for-each>
+            <xsl:apply-templates />
         </div>
-    </xsl:template>-->
+    </xsl:template>
     <xsl:template match="fsb_rpt/page[1]">
         <div class="page" id="title">
         <h1><xsl:value-of select="title"/></h1>

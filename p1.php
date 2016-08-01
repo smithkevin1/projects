@@ -98,7 +98,7 @@
 </div> <!-- #main-container -->
 <div class="footer-container">
     <footer class="wrapper">
-      <h2>Select Student</h2>
+      <h2>Project <?php echo $_GET['proj']?>: Select Student</h2>
         <ul><?php include('list_students.php') ?></ul>
     </footer>
 </div>

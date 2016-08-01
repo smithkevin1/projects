@@ -308,8 +308,50 @@ sup {
 
 
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+#fsb_rpt #intro.page h3::first-letter {
+  text-transform: capitalize;
+}
+
+#fsb_rpt {
+  margin: 5em auto;
+  max-width: 900px;
+}
+#fsb_rpt div {
+    padding: 2em;
+    margin-bottom: 1em;
+    border: 1px dotted black;
+    background-color: white;
+}
+
+#proposal {
+  margin: 5em auto;
+  max-width: 900px;
+}
+#proposal div {
+    padding: 2em;
+    margin-bottom: 1em;
+    border: 1px dotted black;
+    background-color: white;
+}
+
+#proposal #intro.page h3::first-letter {
+  text-transform: capitalize;
+}
 
 
+
+
+
+#cover_letter {
+  margin: 5em 0;
+}
 
 
 
