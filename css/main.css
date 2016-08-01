@@ -350,8 +350,28 @@ img {
 
 
 #cover_letter {
-  margin: 5em 0;
+  margin: 5em auto;
+  max-width: 900px;
+  padding: 2em;
+  margin-bottom: 1em;
+  border: 1px dotted black;
+  background-color: white;
 }
+
+#cover_letter div.header {
+  margin: 5em auto;
+  width: 100%;
+
+}
+
+#cover_letter div.header ul {
+  float: right;
+  margin-left: 70%;
+  width: 30%;
+  min-width: 200px;
+}
+
+
 
 
 
