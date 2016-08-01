@@ -162,11 +162,17 @@
         <div id="fsb_rpt">
             <xsl:for-each select="./page">
                 <xsl:variable name="type" select="@type"/>
-                <div class="page {$type}">
-                    <xsl:apply-templates/>
+                <div class="page" id="{$type}">
+                    <xsl:for-each select="child::*">
+                        <p><xsl:apply-templates/></p>
+                    </xsl:for-each>                  
                 </div>
             </xsl:for-each>
         </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page">
+        <h2><xsl:value-of select="title"/></h2>
+        <h3><xsl:value-of select="subTitle"/></h3>
     </xsl:template>
    
    <!-- templates for public initiative proposals -->
@@ -179,7 +185,7 @@
         <div class="page" id="cover">
             <ul style="list-style-type:none">
                 <li><strong><xsl:value-of select="author"/></strong></li>
-                <li><xsl:value-of select="date"/></li>
+                <li><xsl:value-of select="submit_date"/></li>
                 <li><xsl:value-of select="audience"/></li>
             </ul>
         </div>
@@ -206,6 +212,12 @@
             <h3>Background</h3>  
             <xsl:apply-templates/>
         </div>
+    </xsl:template>
+        <xsl:template match="pub_init_proposal/purpose">
+            <div class="page" id="purpose">
+                <h3>Purpose</h3>  
+                <xsl:apply-templates/>
+            </div>
     </xsl:template>
     <xsl:template match="pub_init_proposal/approach">
         <div class="page" id="approach">
