@@ -172,7 +172,7 @@
     </xsl:template>-->
     <xsl:template match="fsb_rpt/page[1]">
         <div class="page" id="title">
-        <h2><xsl:value-of select="title"/></h2>
+        <h1><xsl:value-of select="title"/></h1>
         <h3><xsl:value-of select="subTitle"/></h3>
             <p><xsl:value-of select="contributors"/></p>
             <p><xsl:value-of select="date"/></p>
