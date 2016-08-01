@@ -122,7 +122,7 @@
     </xsl:template>
    <!-- templates for blog posts -->
     <xsl:template match="DOC//blog_post">
-        <div id="text">
+        <div id="blog_post">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -159,7 +159,7 @@
     
    <!-- templates for feasibility reports -->
     <xsl:template match="DOC//fsb_rpt">
-        <div id="text">
+        <div id="fsb_rpt">
             <xsl:for-each select="./page">
                 <xsl:variable name="type" select="@type"/>
                 <div class="page {$type}">
@@ -171,17 +171,69 @@
    
    <!-- templates for public initiative proposals -->
     <xsl:template match="pub_init_proposal">
-        <div id="text">
+        <div id="proposal">
             <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/cover_page">
+        <div class="page" id="cover">
+            <ul style="list-style-type:none">
+                <li><strong><xsl:value-of select="author"/></strong></li>
+                <li><xsl:value-of select="date"/></li>
+                <li><xsl:value-of select="audience"/></li>
+            </ul>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/tbl_cont">
+        <div class="page" id="tbl_cont">
+            <h3>Table of Contents</h3>
+            <ul>                
+            <xsl:for-each select="section">
+                <li><xsl:value-of select="text()"/></li>
+            </xsl:for-each></ul>
         </div>
     </xsl:template>
     <xsl:template match="pub_init_proposal//p">
         <p><xsl:apply-templates/></p>
     </xsl:template>
-    
+    <xsl:template match="pub_init_proposal/intro">
+        <div class="page" id="intro">
+            <h3><xsl:value-of select="@type"/></h3>           <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/background">
+        <div class="page" id="background">
+            <h3>Background</h3>  
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/approach">
+        <div class="page" id="approach">
+            <h3>Approach</h3> 
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/feasibility">
+        <div class="page" id="feasibility">
+            <h3>Feasibility</h3>  
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/conclu">
+        <div class="page" id="conclusion">
+            <h3>Conclusion</h3>     
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="pub_init_proposal/references">
+        <div class="page" id="references">
+            <h3>References</h3>   
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
     <!-- templates for cover letters -->
     <xsl:template match="cover_letter">
-        <div id="text">
+        <div id="cover_letter">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
