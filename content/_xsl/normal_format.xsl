@@ -158,7 +158,7 @@
     </xsl:template>
     
    <!-- templates for feasibility reports -->
-    <xsl:template match="DOC//fsb_rpt">
+    <!--<xsl:template match="DOC//fsb_rpt">
         <div id="fsb_rpt">
             <xsl:for-each select="./page">
                 <xsl:variable name="type" select="@type"/>
@@ -169,12 +169,115 @@
                 </div>
             </xsl:for-each>
         </div>
-    </xsl:template>
-    <xsl:template match="fsb_rpt/page">
+    </xsl:template>-->
+    <xsl:template match="fsb_rpt/page[1]">
+        <div class="page" id="title">
         <h2><xsl:value-of select="title"/></h2>
         <h3><xsl:value-of select="subTitle"/></h3>
+            <p><xsl:value-of select="contributors"/></p>
+            <p><xsl:value-of select="date"/></p>
+        </div>
     </xsl:template>
-   
+    <xsl:template match="fsb_rpt/page[2]">
+        <div class="page" id="tbl_contents">
+            <h3>Table of Contents</h3>
+            <ul><xsl:for-each select="sect">
+                <xsl:choose>
+                    <xsl:when test="@lvl=1">
+                        <li><xsl:value-of select="text()"/></li>
+                    </xsl:when>
+                    <xsl:otherwise><ul>
+                        <li><xsl:value-of select="text()"/></li>
+                    </ul></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each></ul>
+        </div> 
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='exec_sum']">
+    <div class="page" id="exec_sum">  
+        <h3>Executive Summary</h3>
+            <p><xsl:apply-templates/></p>        
+    </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='pre_req_ana']">
+        <div class="page" id="pre_req_ana">
+            <h3>Preliminary requirements analysis</h3>
+            <xsl:for-each select="child::*">
+                
+                <p><xsl:apply-templates/></p>
+            </xsl:for-each>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='fsb']">
+        
+        <div class="page" id="fsb">
+            <h3>Feasibility</h3>
+            <xsl:for-each select="child::*">
+                <p><xsl:apply-templates/></p>
+            </xsl:for-each>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='sccs_crt']">
+        <div class="page" id="sccs_crt">
+            <h3>Success criteria</h3>
+            <p><xsl:apply-templates/></p>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb//rpt/req_sect">
+        <head><xsl:apply-templates/></head>
+    </xsl:template>
+    <xsl:template match="fsb_rpt//req">
+        <ul><li><xsl:apply-templates/></li></ul>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='dsn']">
+        <div class="page" id="dsn"><h3><xsl:value-of select="img[text()]"/></h3>
+        <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt//img">
+        <img src="{@url}" alt="{text()}"/><xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='cost']">
+        <div class="page" id="cost">
+            <h3>Cost Estimates</h3>
+            <xsl:for-each select="child::*">
+                
+                <p><xsl:apply-templates/></p>
+            </xsl:for-each>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='rpt']">
+        <div class="page" id="rpt">  
+            <h3>Report</h3>
+            <p><xsl:apply-templates/></p>        
+        </div>
+    </xsl:template>
+   <xsl:template match="tmln">
+       <li><xsl:apply-templates/></li>
+   </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='rsk_ana']">
+        <div class="page" id="rsk_ana">  
+            <h3>Risk Analysis</h3>
+            <p><xsl:apply-templates/></p>        
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='fnc']">
+        <div class="page" id="fnc">
+            <h3>Financial</h3>
+            <xsl:for-each select="child::*">                
+                <p><xsl:apply-templates/></p>
+            </xsl:for-each>
+        </div>
+    </xsl:template>
+    <xsl:template match="fsb_rpt/page[@type='conc']">
+        <div class="page" id="conc">
+            <h3>Conclusion</h3>
+            <xsl:for-each select="child::*">                
+                <p><xsl:apply-templates/></p>
+                
+            </xsl:for-each>
+        </div>
+    </xsl:template>
    <!-- templates for public initiative proposals -->
     <xsl:template match="pub_init_proposal">
         <div id="proposal">
