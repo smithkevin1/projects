@@ -141,7 +141,7 @@
         <br/><br/>
     </xsl:template>
     <xsl:template match="blog_post//visual">       
-        <img src="{@url}" alt="{child::text()}" />
+        <figure><img src="{@url}" alt="{child::text()}" /><figcaption><xsl:value-of select="child::text()"/></figcaption></figure>
     </xsl:template>
     <xsl:template match="blog_post//ref">       
         <a href="{@url}" alt="{@type}" ><xsl:apply-templates/></a>
@@ -149,14 +149,17 @@
     <xsl:template match="blog_post//section_header">
         <h3><xsl:apply-templates></xsl:apply-templates></h3>
     </xsl:template>
-    <xsl:template match="blog_post//roadmap">
-        <ul>
-            <xsl:for-each select="child::section_header">
-                <li><xsl:apply-templates/></li>
-            </xsl:for-each>
-        </ul>
+    <xsl:template match="blog_post//important_idea">
+        <span class="italics"><xsl:apply-templates/></span>
     </xsl:template>
-    
+    <xsl:template match="blog_post//roadmap">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+    <xsl:template match="blog_post//roadmap//section_header">
+        <strong><xsl:apply-templates/></strong>
+    </xsl:template>
    <!-- templates for feasibility reports -->
     <xsl:template match="DOC//fsb_rpt">
         <div id="fsb_rpt">
@@ -180,7 +183,11 @@
                         <li><xsl:value-of select="text()"/></li>
                     </xsl:when>
                     <xsl:otherwise><ul>
-                        <li><xsl:value-of select="text()"/></li>
+                        <xsl:if test="@n=1"><li>A. <xsl:value-of select="text()"/></li></xsl:if>
+                        <xsl:if test="@n=2"><li>B. <xsl:value-of select="text()"/></li></xsl:if>
+                        <xsl:if test="@n=3"><li>C. <xsl:value-of select="text()"/></li></xsl:if>
+                        <xsl:if test="@n=4"><li>D. <xsl:value-of select="text()"/></li></xsl:if>
+                        <xsl:if test="@n=5"><li>E. <xsl:value-of select="text()"/></li></xsl:if>
                     </ul></xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each></ul>
@@ -223,12 +230,12 @@
         <ul><li><xsl:apply-templates/></li></ul>
     </xsl:template>
     <xsl:template match="fsb_rpt/page[@type='dsn']">
-        <div class="page" id="dsn"><h3><xsl:value-of select="img[text()]"/></h3>
+        <div class="page" id="dsn"><h3>Design</h3>
         <xsl:apply-templates/>
         </div>
     </xsl:template>
     <xsl:template match="fsb_rpt//img">
-        <img src="{@url}" alt="{text()}"/><xsl:apply-templates/>
+        <figure><img src="{@url}" alt="{child::text()}" /><figcaption><xsl:value-of select="child::text()"/></figcaption></figure> <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="fsb_rpt/page[@type='cost']">
         <div class="page" id="cost">
@@ -246,7 +253,7 @@
         </div>
     </xsl:template>
    <xsl:template match="tmln">
-       <li><xsl:apply-templates/></li>
+       <li><strong><xsl:value-of select="@date"/>: </strong> <xsl:apply-templates/></li>
    </xsl:template>
     <xsl:template match="fsb_rpt/page[@type='rsk_ana']">
         <div class="page" id="rsk_ana">  
@@ -340,6 +347,9 @@
         </div>
     </xsl:template>
     <!-- templates for cover letters -->
+    <xsl:template match="cover_letter//pb">
+        <br /><br />
+    </xsl:template>
     <xsl:template match="cover_letter">
         <div id="cover_letter">
             <xsl:apply-templates/>
@@ -390,8 +400,7 @@
             <xsl:choose>
                 <xsl:when test="@type='peer'">
                     <h3>Peer review</h3>
-                    <h4><xsl:value-of select="//docReview/reviewer"/></h4>
-                    
+                    <!--<h4><xsl:value-of select="//docReview/reviewer"/></h4>-->                   
                 </xsl:when>
                 <xsl:when test="@type='instructor'">
                     <h3>Instructor Note</h3>
@@ -399,6 +408,9 @@
             </xsl:choose>
             <xsl:apply-templates/>
         </div>
+    </xsl:template>
+    <xsl:template match="docReview//report/p">
+        <p><xsl:apply-templates/></p>
     </xsl:template>
     
 </xsl:stylesheet>

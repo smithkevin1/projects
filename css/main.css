@@ -308,15 +308,34 @@ sup {
 
 
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+figure {
+    display: block;
+
+    margin: 20px; /* adjust as needed */
+}
+figure img {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid black;
+    vertical-align: top;
+}
+figure figcaption {
+    border: none;
+    text-align: center;
+    font-style: italic;
+    font-size: smaller;
 }
 
-#fsb_rpt #intro.page h3::first-letter {
-  text-transform: capitalize;
+span.italics {
+  font-style: italic;
+}
+
+#fsb_rpt #tbl_contents ul {
+  list-style-type: upper-roman;
+}
+
+#fsb_rpt #tbl_contents ul ul li {
+  list-style-type: none;
 }
 
 #fsb_rpt {
@@ -359,18 +378,22 @@ img {
 }
 
 #cover_letter div.header {
-  margin: 5em auto;
+  display: block;
   width: 100%;
-
+  height: auto;
+  margin: 1em auto;
 }
 
 #cover_letter div.header ul {
-  float: right;
-  margin-left: 70%;
-  width: 30%;
+  float: left;
+  padding: 5em 0;
+  width: 100%;
   min-width: 200px;
 }
 
+#cover_letter p.closing {
+  padding-bottom: 5em;
+}
 
 
 
