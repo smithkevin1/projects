@@ -316,7 +316,6 @@ figure {
 figure img {
     display: block;
     margin: 0 auto;
-    border: 1px solid black;
     vertical-align: top;
 }
 figure figcaption {
@@ -394,6 +393,8 @@ span.italics {
 #cover_letter p.closing {
   padding-bottom: 5em;
 }
+
+#cover_letter
 
 
 
