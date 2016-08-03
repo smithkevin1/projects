@@ -146,7 +146,7 @@
     <xsl:template match="blog_post//ref">       
         <a href="{@url}" alt="{@type}" ><xsl:apply-templates/></a>
     </xsl:template>
-    <xsl:template match="blog_post//section_header">
+    <xsl:template match="blog_post//section_header[not(ancestor::roadmap)]">
         <h3><xsl:apply-templates></xsl:apply-templates></h3>
     </xsl:template>
     <xsl:template match="blog_post//important_idea">
@@ -174,7 +174,7 @@
             <p><xsl:value-of select="date"/></p>
         </div>
     </xsl:template>
-    <xsl:template match="fsb_rpt/page[2]">
+    <xsl:template match="fsb_rpt/page[@type='tbl_contents']">
         <div class="page" id="tbl_contents">
             <h3>Table of Contents</h3>
             <ul><xsl:for-each select="sect">
@@ -217,18 +217,19 @@
             </xsl:for-each>
         </div>
     </xsl:template>
+    
     <xsl:template match="fsb_rpt/page[@type='sccs_crt']">
         <div class="page" id="sccs_crt">
             <h3>Success criteria</h3>
             <p><xsl:apply-templates/></p>
         </div>
     </xsl:template>
-    <xsl:template match="fsb//rpt/req_sect">
-        <head><xsl:apply-templates/></head>
+    <xsl:template match="fsb_rpt//req_sect">
+        <span class="italics"><xsl:value-of select="child::text()[not(ancestor-or-self::req)]"/></span><ul><xsl:for-each select="req">
+            <li><xsl:apply-templates/></li>
+        </xsl:for-each></ul>
     </xsl:template>
-    <xsl:template match="fsb_rpt//req">
-        <ul><li><xsl:apply-templates/></li></ul>
-    </xsl:template>
+    
     <xsl:template match="fsb_rpt/page[@type='dsn']">
         <div class="page" id="dsn"><h3>Design</h3>
         <xsl:apply-templates/>
@@ -286,10 +287,11 @@
     </xsl:template>
     <xsl:template match="pub_init_proposal/cover_page">
         <div class="page" id="cover">
+            <h3><xsl:value-of select="./title"/></h3>
             <ul style="list-style-type:none">
                 <li><strong><xsl:value-of select="author"/></strong></li>
                 <li><xsl:value-of select="submit_date"/></li>
-                <li><xsl:value-of select="audience"/></li>
+                <li>Attention to: <xsl:value-of select="audience"/></li>
             </ul>
         </div>
     </xsl:template>
