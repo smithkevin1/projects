@@ -329,6 +329,10 @@ span.italics {
   font-style: italic;
 }
 
+span.underline {
+  text-decoration: underline;
+}
+
 #fsb_rpt #tbl_contents ul {
   list-style-type: upper-roman;
 }
