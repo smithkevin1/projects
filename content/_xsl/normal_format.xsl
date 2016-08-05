@@ -163,7 +163,7 @@
             <xsl:apply-templates/>
         </a>
     </xsl:template>
-    <xsl:template match="blog_post//section_header[not(ancestor::roadmap)]">
+    <xsl:template match="blog_post//section_header[not(ancestor::list)]">
         <h3>
             <xsl:apply-templates/>
         </h3>
@@ -173,12 +173,15 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-    <xsl:template match="blog_post//roadmap">
+    <xsl:template match="blog_post//list">
         <p>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
-    <xsl:template match="blog_post//roadmap//section_header">
+    <xsl:template match="blog_post//list//pb">
+        <br/>
+    </xsl:template>
+    <xsl:template match="blog_post//list//section_header">
         <strong>
             <xsl:apply-templates/>
         </strong>
@@ -211,12 +214,12 @@
             <ul>
                 <xsl:for-each select="sect">
                     <xsl:choose>
-                        <xsl:when test="@lvl = 1">
+                        <xsl:when test="@lvl=false() or @lvl = 1">
                             <li>
                                 <xsl:value-of select="text()"/>
                             </li>
                         </xsl:when>
-                        <xsl:otherwise>
+                        <xsl:when test="@lvl = 2">
                             <ul>
                                 <xsl:if test="@n = 1">
                                     <li>A. <xsl:value-of select="text()"/></li>
@@ -234,6 +237,25 @@
                                     <li>E. <xsl:value-of select="text()"/></li>
                                 </xsl:if>
                             </ul>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <ul><ul>
+                                <xsl:if test="@n = 1">
+                                    <li>1. <xsl:value-of select="text()"/></li>
+                                </xsl:if>
+                                <xsl:if test="@n = 2">
+                                    <li>2. <xsl:value-of select="text()"/></li>
+                                </xsl:if>
+                                <xsl:if test="@n = 3">
+                                    <li>3. <xsl:value-of select="text()"/></li>
+                                </xsl:if>
+                                <xsl:if test="@n = 4">
+                                    <li>4. <xsl:value-of select="text()"/></li>
+                                </xsl:if>
+                                <xsl:if test="@n = 5">
+                                    <li>5. <xsl:value-of select="text()"/></li>
+                                </xsl:if>
+                            </ul></ul>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:for-each>
@@ -462,7 +484,7 @@
         </div>
     </xsl:template>
     <!-- templates for cover letters -->
-    <xsl:template match="cover_letter//pb">
+    <xsl:template match="cover_letter//pb[not(ancestor::list)]">
         <br/>
         <br/>
     </xsl:template>
