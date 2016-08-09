@@ -72,8 +72,9 @@
                   </section>
                 </article>
 
+<article>
                 <header>
-                  <h2>Project 2</h1>
+                  <h2>Project 3</h1>
                 </header>
                 <section>
                   <p>
