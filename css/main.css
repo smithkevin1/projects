@@ -335,6 +335,10 @@ span.underline {
   text-decoration: underline;
 }
 
+span.bold {
+  font-weight: bold;
+}
+
 #blog_post {
   padding: 2em;
   margin-bottom: 1em;

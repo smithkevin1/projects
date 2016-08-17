@@ -60,7 +60,7 @@
         </p>
     </xsl:template>
 
-    <xsl:template match="DOC//title">
+    <xsl:template match="DOC//title[not(parent::blog_post)]">
         <xsl:choose>
             <xsl:when test="./@level = 'a'">
                 <xsl:apply-templates/>
@@ -130,10 +130,32 @@
         </li>
     </xsl:template>
     <!-- templates for blog posts -->
+    <xsl:template match="DOC//style">
+        <xsl:if test="@type = 'italics'">
+            <span class="italics">
+                <xsl:apply-templates/>
+            </span>
+        </xsl:if>
+        <xsl:if test="@type = 'underline'">
+            <span class="underline">
+                <xsl:apply-templates/>
+            </span>
+        </xsl:if>
+        <xsl:if test="@type = 'bold'">
+            <span class="bold">
+                <xsl:apply-templates/>
+            </span>
+        </xsl:if>
+    </xsl:template>
     <xsl:template match="DOC//blog_post">
         <div id="blog_post">
             <xsl:apply-templates/>
         </div>
+    </xsl:template>
+    <xsl:template match="blog_post/title">
+        <h1>
+            <xsl:apply-templates/>
+        </h1>
     </xsl:template>
     <xsl:template match="blog_post//background">
         <div class="blog.background">
@@ -144,6 +166,9 @@
         <div class="blog.answer">
             <xsl:apply-templates/>
         </div>
+    </xsl:template>
+    <xsl:template match="blog_post//hr">
+        <hr/>
     </xsl:template>
     <!-- global elements -->
     <xsl:template match="blog_post//pb">
@@ -192,6 +217,10 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+    <xsl:template match="fsb_rpt//pb">
+        <br/>
+        <br/>
+    </xsl:template>
     <xsl:template match="fsb_rpt/page[1]">
         <div class="page" id="title">
             <h1>
@@ -214,7 +243,7 @@
             <ul>
                 <xsl:for-each select="sect">
                     <xsl:choose>
-                        <xsl:when test="@lvl=false() or @lvl = 1">
+                        <xsl:when test="@lvl = false() or @lvl = 1">
                             <li>
                                 <xsl:value-of select="text()"/>
                             </li>
@@ -239,23 +268,25 @@
                             </ul>
                         </xsl:when>
                         <xsl:otherwise>
-                            <ul><ul>
-                                <xsl:if test="@n = 1">
-                                    <li>1. <xsl:value-of select="text()"/></li>
-                                </xsl:if>
-                                <xsl:if test="@n = 2">
-                                    <li>2. <xsl:value-of select="text()"/></li>
-                                </xsl:if>
-                                <xsl:if test="@n = 3">
-                                    <li>3. <xsl:value-of select="text()"/></li>
-                                </xsl:if>
-                                <xsl:if test="@n = 4">
-                                    <li>4. <xsl:value-of select="text()"/></li>
-                                </xsl:if>
-                                <xsl:if test="@n = 5">
-                                    <li>5. <xsl:value-of select="text()"/></li>
-                                </xsl:if>
-                            </ul></ul>
+                            <ul>
+                                <ul>
+                                    <xsl:if test="@n = 1">
+                                        <li>1. <xsl:value-of select="text()"/></li>
+                                    </xsl:if>
+                                    <xsl:if test="@n = 2">
+                                        <li>2. <xsl:value-of select="text()"/></li>
+                                    </xsl:if>
+                                    <xsl:if test="@n = 3">
+                                        <li>3. <xsl:value-of select="text()"/></li>
+                                    </xsl:if>
+                                    <xsl:if test="@n = 4">
+                                        <li>4. <xsl:value-of select="text()"/></li>
+                                    </xsl:if>
+                                    <xsl:if test="@n = 5">
+                                        <li>5. <xsl:value-of select="text()"/></li>
+                                    </xsl:if>
+                                </ul>
+                            </ul>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:for-each>
@@ -285,7 +316,7 @@
                         </p>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:for-each>           
+            </xsl:for-each>
         </div>
     </xsl:template>
     <xsl:template match="fsb_rpt/page[@type = 'fsb']">
@@ -508,11 +539,21 @@
         </li>
     </xsl:template>
     <xsl:template match="cover_letter//contact">
-        <li>
-            <xsl:apply-templates/>
-        </li>
+        <xsl:choose>
+            <xsl:when test="@url=true()">
+                <li>
+                    <a href="{@url}"><xsl:apply-templates/></a>
+                </li>
+            </xsl:when>
+            <xsl:otherwise>
+                <li>
+                    <xsl:apply-templates/>
+                </li>
+            </xsl:otherwise>
+            
+        </xsl:choose>
     </xsl:template>
-
+    <xsl:template match="cover_letter//contact/@url"/>
     <xsl:template match="cover_letter//greeting">
         <p class="greeting">
             <xsl:apply-templates/>
@@ -538,12 +579,16 @@
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
-    <xsl:template match="cover_letter//signature/*">
+    <xsl:template match="cover_letter//signature/salutation | name">
         <li>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
-
+    <xsl:template match="cover_letter//img">
+        <figure>
+            <img src="{@url}" alt="{child::text()}"/>
+        </figure>
+    </xsl:template>
     <!-- This section processes the reviews/end notes for the document -->
     <xsl:template match="docReview">
         <div id="reviews">

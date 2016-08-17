@@ -162,9 +162,7 @@
 
 
                     <section><h3>&lt;technical_principle&gt;</h3><p>Fundamental theory and concepts involved (such as gravity, matter and
-                            energy, fluid dynamics, acid-base reactions, etc.). Required in both "background"
-                            and "answer," must come before "specific_topic" in "background" [takes @n
-                            attribute]</p></section>
+                            energy, fluid dynamics, acid-base reactions, etc.). Global element, required in background, suggested in answer section.</p></section>
                     <section><h3>&lt;answer&gt;</h3><p>Body of text that moves towards the answer of the question, presenting
                             topics, ideas, analogies, and explanations that lead towards the ultimate
                             conclusion</p></section>
